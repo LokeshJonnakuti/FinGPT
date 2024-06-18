@@ -1,8 +1,8 @@
-import random
 import openai
 import time
 import json
 import argparse
+import secrets
 
 # START: COPIED FROM <https://github.com/RUCAIBox/HaluEval.git>
 
@@ -149,7 +149,7 @@ def filtering_qa_dataset(file1, file2, instruction, output_path):
             right_ans = data1[i]["right_answer"]
 
             if answer1 == answer2:
-                if random.random() > 0.5:
+                if secrets.SystemRandom().random() > 0.5:
                     ans = "The best answer is Answer 2."
                 else:
                     ans = "The best answer is Answer 1."
@@ -196,7 +196,7 @@ def filtering_dialogue_dataset(file1, file2, instruction, output_path):
             response2 = data2[i]["hallucinated_response"]
 
             if response1 == response2:
-                if random.random() > 0.5:
+                if secrets.SystemRandom().random() > 0.5:
                     res = "The best response is Response 2."
                 else:
                     res = "The best response is Response 1."
@@ -248,7 +248,7 @@ def filtering_summarization_dataset(file1, file2, instruction, output_path):
             summary2 = data2[i]["hallucinated_summary"]
 
             if summary1 == summary2:
-                if random.random() > 0.5:
+                if secrets.SystemRandom().random() > 0.5:
                     res = "The best summary is Summary 2."
                 else:
                     res = "The best summary is Summary 1."

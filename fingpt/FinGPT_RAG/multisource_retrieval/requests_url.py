@@ -1,10 +1,10 @@
-import random
 import time
 import html
 import requests
 from zenrows import ZenRowsClient
 from urllib.parse import urlparse
 from proxies import headers
+import secrets
 
 # logging.basicConfig()
 # logging.getLogger().setLevel(logging.DEBUG)
@@ -17,7 +17,7 @@ from proxies import headers
 
 def requests_get(url, proxy=None):
     try:
-        sleep_time = random.randint(1, 5)
+        sleep_time = secrets.SystemRandom().randint(1, 5)
         time.sleep(sleep_time)
 
         client = ZenRowsClient("6026db40fdbc3db28235753087be6225f047542f")
@@ -32,7 +32,7 @@ def requests_get(url, proxy=None):
         ]
 
         headers = {
-            'User-Agent': random.choice(user_agents),
+            'User-Agent': secrets.choice(user_agents),
             'Referer': 'https://seekingalpha.com/search?q=&tab=headlines'
         }
 

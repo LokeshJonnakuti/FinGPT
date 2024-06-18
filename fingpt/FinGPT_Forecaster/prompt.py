@@ -1,12 +1,12 @@
 import os
 import json
-import random
 import finnhub
 import yfinance as yf
 import pandas as pd
 from openai import OpenAI
 
 from indices import *
+import secrets
 
 finnhub_client = finnhub.Client(api_key=os.environ.get("FINNHUB_KEY"))
 
@@ -75,7 +75,7 @@ def get_crypto_prompt_by_row(symbol, row):
 
 def sample_news(news, k=5):
     
-    return [news[i] for i in sorted(random.sample(range(len(news)), k))]
+    return [news[i] for i in sorted(secrets.SystemRandom().sample(range(len(news)), k))]
 
 
 def map_bin_label(bin_lb):
@@ -122,7 +122,7 @@ def get_all_prompts(symbol, data_dir, start_date, end_date, min_past_weeks=1, ma
 
         prompt = ""
         if len(prev_rows) >= min_past_weeks:
-            idx = min(random.choice(range(min_past_weeks, max_past_weeks+1)), len(prev_rows))
+            idx = min(secrets.choice(range(min_past_weeks, max_past_weeks+1)), len(prev_rows))
             for i in range(-idx, 0):
                 # Add Price Movement (Head)
                 prompt += "\n" + prev_rows[i][0]

@@ -4,11 +4,11 @@
 # DeepSpeed Team
 import os
 import torch
-import random
 import numpy as np
 from transformers import set_seed
 import deepspeed
 from deepspeed.runtime.zero.partition_parameters import ZeroParamStatus
+import secrets
 
 
 def print_rank_0(msg, rank=0):
@@ -63,7 +63,7 @@ def save_hf_format(model, tokenizer, args, sub_folder=""):
 def set_random_seed(seed):
     if seed is not None:
         set_seed(seed)
-        random.seed(seed)
+        secrets.SystemRandom().seed(seed)
         np.random.seed(seed)
         torch.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)

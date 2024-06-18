@@ -6,11 +6,11 @@ This file contains helper methods to generate request headers.
 """
 
 from enum import Enum
-import random
 import requests
 from lxml.html import fromstring
 from itertools import cycle
 import traceback
+import secrets
 
 userAgents = [
     # Chrome
@@ -72,7 +72,7 @@ def getValidProxies():
     if not proxies:
         return []
 
-    random.shuffle(proxies)
+    secrets.SystemRandom().shuffle(proxies)
     proxy_pool = cycle(proxies)
     validProxies = set()
     atLeastOneValid = False
@@ -119,7 +119,7 @@ def getProxy():
     validProxies = getValidProxies()
     
     if validProxies:
-        validProxy = random.choice(validProxies)
+        validProxy = secrets.choice(validProxies)
         print ("Chosen Proxy: ", validProxy)
         return { "http": validProxy }
         # return { "http": validProxy, "https": validProxy }
@@ -142,7 +142,7 @@ def getHeaders(siteEnum):
         ref = ''
 
     # randomize the user agent
-    userAgent = random.choice(userAgents)
+    userAgent = secrets.choice(userAgents)
     
     return {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
