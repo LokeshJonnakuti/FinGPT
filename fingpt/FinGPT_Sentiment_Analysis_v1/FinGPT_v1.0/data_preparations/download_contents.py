@@ -1,10 +1,10 @@
 import os
 import pandas as pd
-import numpy as np
 import requests
 from lxml import etree
 import multiprocessing as mp
 import json
+from security import safe_requests
 
 # The result_path should be the results with only titles which is the IN path
 result_path = r"D:\python_project\FinRL-Meta\experiment\scrape\results"
@@ -35,7 +35,7 @@ def get_one_content(x):
     ok = False
     while not ok:
         try:
-            response = requests.get(url = url, headers = headers, proxies= proxies)
+            response = safe_requests.get(url = url, headers = headers, proxies= proxies)
             if response.status_code == 200:
                 res = etree.HTML(response.text)
                 res = res.xpath("//script[2]//text()")[0]

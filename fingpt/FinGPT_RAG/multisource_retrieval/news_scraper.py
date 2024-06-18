@@ -1,25 +1,12 @@
 import os
 import time
-import sys
-import json
 import re
 import itertools
-import multiprocessing
-import requests
-import urllib.parse
 from dotenv import load_dotenv
 import pandas as pd
 from bs4 import BeautifulSoup
 from gui import gui
-
-# Scraper tools:
-import tweepy
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from searchtweets import load_credentials
-
-# From src/
-import requests_url
 from requests_url import requests_get
 from scrapers.yahoo import scrape_yahoo
 from sentence_processing.split_sentence import split_sentence
@@ -27,6 +14,7 @@ from scrapers.cnbc import scrape_cnbc
 from scrapers.market_screener import scrape_market_screener
 from scrapers import url_encode
 from scrapers.google.scrape_google import scrape_google
+from security import safe_requests
 
 # TODO: Twitter API requests # https://twitter.com/bryan4665/
 
@@ -487,7 +475,7 @@ def scrape_twitter(url, subject):
                 "User-Agent": "v2TweetLookupPython",
                 "Authorization": f"Bearer {twitter_bearer_token}"  # Replace 'token' with your actual bearer token
             }
-            response = requests.get(endpoint_url, headers=headers)
+            response = safe_requests.get(endpoint_url, headers=headers)
 
 
             if response.status_code == 200:
