@@ -47,7 +47,7 @@ class Site(Enum):
 
 def getFreeProxies():
     url = 'https://free-proxy-list.net/'
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     parser = fromstring(response.text)
     proxies = set()
 
@@ -79,7 +79,7 @@ def getValidProxies():
 
     # find my IP
     url = 'https://httpbin.org/ip'
-    myIP = requests.get(url).json()
+    myIP = requests.get(url, timeout=60).json()
 
     i = 0
     # test at most three proxies (but keep testing if we haven't found a valid one yet)

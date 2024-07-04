@@ -487,7 +487,7 @@ def scrape_twitter(url, subject):
                 "User-Agent": "v2TweetLookupPython",
                 "Authorization": f"Bearer {twitter_bearer_token}"  # Replace 'token' with your actual bearer token
             }
-            response = requests.get(endpoint_url, headers=headers)
+            response = requests.get(endpoint_url, headers=headers, timeout=60)
 
 
             if response.status_code == 200:

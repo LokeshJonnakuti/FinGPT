@@ -33,7 +33,7 @@ def extract_classification(text, classification_prompt):
     print("Sending request to", api_url, "with payload", payload)
 
     try:
-        response = requests.post(api_url, headers=headers, json=payload)
+        response = requests.post(api_url, headers=headers, json=payload, timeout=60)
         json_data = response.json()
         print("json data", json_data)
         classification_response = json_data["choices"][0]['message']['content'].strip()

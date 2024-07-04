@@ -79,7 +79,7 @@ def requests_get_for_seeking_alpha(url, subject):
         "highlight.primary_symbols": "{pre_tag:'<strong>',post_tag:'<<<<strong>'}"
     }
     print("Sending request to", url, "with headers", headers, "with params", params)
-    response = requests.get(url, headers=headers, params=params)
+    response = requests.get(url, headers=headers, params=params, timeout=60)
 
     response.encoding = 'utf-8'
     print(html.unescape(response.json().get("hits").get("hit")[0].get("highlights")))
@@ -89,7 +89,7 @@ def get_redirected_domain(url):
     try:
         if len(url) == 0:
             return None
-        response = requests.head(url[0], allow_redirects=True)
+        response = requests.head(url[0], allow_redirects=True, timeout=60)
         final_url = response.url
         return final_url
     except requests.exceptions.RequestException as e:

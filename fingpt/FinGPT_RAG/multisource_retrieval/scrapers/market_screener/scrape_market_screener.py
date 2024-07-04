@@ -6,7 +6,7 @@ import sys
 
 def requests_get(url):
     try:
-        return requests.get(url)
+        return requests.get(url, timeout=60)
     except Exception as e:
         print(f"Exception occurred while trying to get url: {url}, error: {str(e)}")
         return None

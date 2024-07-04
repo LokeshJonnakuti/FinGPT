@@ -35,7 +35,7 @@ def get_one_content(x):
     ok = False
     while not ok:
         try:
-            response = requests.get(url = url, headers = headers, proxies= proxies)
+            response = requests.get(url = url, headers = headers, proxies= proxies, timeout=60)
             if response.status_code == 200:
                 res = etree.HTML(response.text)
                 res = res.xpath("//script[2]//text()")[0]
