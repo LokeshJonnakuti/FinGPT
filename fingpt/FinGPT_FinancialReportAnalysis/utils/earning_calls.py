@@ -1,9 +1,9 @@
 from tenacity import retry, stop_after_attempt, wait_random_exponential
-import requests
 import json
 from datetime import datetime
 import re
 from typing import List
+from security import safe_requests
 
 
 def correct_date(yr, dt):
@@ -46,7 +46,7 @@ def get_earnings_transcript(quarter: str, ticker: str, year: int):
         ticker (str)
         year (int)
     """
-    response = requests.get(
+    response = safe_requests.get(
         f"https://discountingcashflows.com/api/transcript/{ticker}/{quarter}/{year}/",
         auth=("user", "pass"),
     )

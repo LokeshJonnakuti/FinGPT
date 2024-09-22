@@ -11,6 +11,7 @@ import requests
 from lxml.html import fromstring
 from itertools import cycle
 import traceback
+from security import safe_requests
 
 userAgents = [
     # Chrome
@@ -91,7 +92,7 @@ def getValidProxies():
         proxy = next(proxy_pool)
         print("\nRequest #%d using %s" % (i, proxy))
         try:
-            response = requests.get(url, proxies={"http": proxy, "https": proxy}, timeout=1.0)
+            response = safe_requests.get(url, proxies={"http": proxy, "https": proxy}, timeout=1.0)
 
             # not good if it doesn't mask
             if myIP == response.json():

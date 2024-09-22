@@ -1,7 +1,8 @@
-import requests
 from bs4 import BeautifulSoup
 import urllib
 import sys
+from security import safe_requests
+
 sys.path.append("..")
 
 # Tested: python src/scrapers/cnbc/scrape_cnbc.py https://www.cnbc.com/2020/01/02/fda-issues-ban-on-some-flavored-vaping-products.html "FDA issues ban on some fruit and mint flavored vaping products"
@@ -9,7 +10,7 @@ sys.path.append("..")
 
 def requests_get(url):
     try:
-        return requests.get(url)
+        return safe_requests.get(url)
     except Exception as e:
         print(f"Exception occurred while trying to get url: {url}, error: {str(e)}")
         return None

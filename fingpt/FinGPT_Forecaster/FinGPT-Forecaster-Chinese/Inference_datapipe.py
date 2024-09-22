@@ -4,7 +4,7 @@ from datetime import date, datetime, timedelta
 from Ashare_data import *
 import akshare as ak
 import pandas as pd
-import requests
+from security import safe_requests
 
 #default symbol
 symbol = "600519"
@@ -31,7 +31,7 @@ def stock_news_em(symbol: str = "300059", page = 1) -> pd.DataFrame:
         + ',"type":["cmsArticleWebOld"],"client":"web","clientType":"web","clientVersion":"curr","param":{"cmsArticleWebOld":{"searchScope":"default","sort":"default",' + f'"pageIndex":{page}'+ ',"pageSize":100,"preTag":"<em>","postTag":"</em>"}}}',
         "_": "1668256937996",
     }
-    r = requests.get(url, params=params)
+    r = safe_requests.get(url, params=params)
     data_text = r.text
     data_json = json.loads(
         data_text.strip("jQuery3510875346244069884_1668256937995(")[:-1]

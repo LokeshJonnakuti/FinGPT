@@ -1,14 +1,15 @@
-import requests
 from bs4 import BeautifulSoup
 
 import sys
+from security import safe_requests
+
 sys.path.append("..")
 
 # Test: https://uk.movies.yahoo.com/amphtml/tyson-foods-inc-first-quarter-183314970.html "Tyson Foods, Inc. First-Quarter Results Just Came Out: Here's What Analysts Are Forecasting For Next Year"
 
 def requests_get(url):
     try:
-        return requests.get(url)
+        return safe_requests.get(url)
     except Exception as e:
         print(f"Exception occurred while trying to get url: {url}, error: {str(e)}")
         return None

@@ -1,12 +1,12 @@
-import requests
 from bs4 import BeautifulSoup
 import sys
+from security import safe_requests
 
 # tested: python src/scrapers/market_screener/scrape_market_screener.py https://www.marketscreener.com/quote/stock/BBVA-69719/news/Spanish-companies-households-snap-up-state-backed-emergency-credit-30346351/ "Spanish companies, households snap up state-backed emergency .... Spanish companies households up state backed credit"
 
 def requests_get(url):
     try:
-        return requests.get(url)
+        return safe_requests.get(url)
     except Exception as e:
         print(f"Exception occurred while trying to get url: {url}, error: {str(e)}")
         return None

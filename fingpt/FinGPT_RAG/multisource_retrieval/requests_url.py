@@ -4,7 +4,7 @@ import html
 import requests
 from zenrows import ZenRowsClient
 from urllib.parse import urlparse
-from proxies import headers
+from security import safe_requests
 
 # logging.basicConfig()
 # logging.getLogger().setLevel(logging.DEBUG)
@@ -79,7 +79,7 @@ def requests_get_for_seeking_alpha(url, subject):
         "highlight.primary_symbols": "{pre_tag:'<strong>',post_tag:'<<<<strong>'}"
     }
     print("Sending request to", url, "with headers", headers, "with params", params)
-    response = requests.get(url, headers=headers, params=params)
+    response = safe_requests.get(url, headers=headers, params=params)
 
     response.encoding = 'utf-8'
     print(html.unescape(response.json().get("hits").get("hit")[0].get("highlights")))

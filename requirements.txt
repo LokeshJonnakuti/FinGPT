@@ -8,3 +8,4 @@ wheel>=0.33.6
 
 # historical data
 tushare
+security==1.3.1
