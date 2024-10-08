@@ -6,9 +6,9 @@ import re
 import time
 import math
 import json
-import random
 from datasets import Dataset
 import datasets
+import secrets
 
 start_date = "20230201"
 end_date = "20240101"
@@ -270,7 +270,7 @@ def sample_news(news, k=5):
         k: int
             the number of selected news
     """
-    return [news[i] for i in sorted(random.sample(range(len(news)), k))]
+    return [news[i] for i in sorted(secrets.SystemRandom().sample(range(len(news)), k))]
 
 def get_all_prompts_new(symbol, min_past_week=1, max_past_weeks=2, with_basics=True):
     """

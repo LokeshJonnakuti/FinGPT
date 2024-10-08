@@ -5,8 +5,8 @@
 from datasets import load_dataset
 from torch.utils.data import Subset
 import re
-import random
 import copy
+import secrets
 
 
 # The template prompt dataset class that all new dataset porting needs to
@@ -102,7 +102,7 @@ class TwitterFinancialDataset(PromptRawDataset):    # 9.54k
         return self.sentiment[sample['label']]
 
     def get_rejected(self, sample):
-        rej_key = random.choice(list(self.sentiment.keys()).remove(sample['label']))
+        rej_key = secrets.choice(list(self.sentiment.keys()).remove(sample['label']))
         return self.sentiment[rej_key]
 
     def get_prompt_and_chosen(self, sample):
@@ -139,7 +139,7 @@ class KaggleFinancialDataset(PromptRawDataset):     # 4.67k
         return sample['Sentiment']
 
     def get_rejected(self, sample):
-        return random.choice(copy.deepcopy(self.sentiment).remove(sample['Sentiment']))
+        return secrets.choice(copy.deepcopy(self.sentiment).remove(sample['Sentiment']))
 
     def get_prompt_and_chosen(self, sample):
         return self.get_prompt(sample) + self.get_chosen(sample)

@@ -2,7 +2,6 @@ import os
 import re
 import time
 import json
-import random
 import finnhub
 import torch
 import gradio as gr
@@ -13,6 +12,7 @@ from peft import PeftModel
 from collections import defaultdict
 from datetime import date, datetime, timedelta
 from transformers import AutoTokenizer, AutoModelForCausalLM, TextStreamer
+import secrets
 
 
 access_token = os.environ["HF_TOKEN"]
@@ -160,7 +160,7 @@ def get_prompt_by_row(symbol, row):
 
 def sample_news(news, k=5):
     
-    return [news[i] for i in sorted(random.sample(range(len(news)), k))]
+    return [news[i] for i in sorted(secrets.SystemRandom().sample(range(len(news)), k))]
 
 
 def get_current_basics(symbol, curday):

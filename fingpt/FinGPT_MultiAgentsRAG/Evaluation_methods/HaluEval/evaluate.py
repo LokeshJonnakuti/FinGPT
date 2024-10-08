@@ -1,9 +1,9 @@
-import random
 import openai
 import time
 import json
 import argparse
 import tiktoken
+import secrets
 
 # START: COPIED FROM <https://github.com/RUCAIBox/HaluEval.git>
 openai.api_key = 'sk-'
@@ -177,7 +177,7 @@ def evaluation_qa_dataset(model, file, instruction, output_path):
             hallucinated_answer = data[i]["hallucinated_answer"]
             right_answer = data[i]["right_answer"]
 
-            if random.random() > 0.5:
+            if secrets.SystemRandom().random() > 0.5:
                 answer = hallucinated_answer
                 ground_truth = "Yes"
             else:
@@ -232,7 +232,7 @@ def evaluation_dialogue_dataset(model, file, instruction, output_path):
             hallucinated_response = data[i]["hallucinated_response"]
             right_response = data[i]["right_response"]
 
-            if random.random() > 0.5:
+            if secrets.SystemRandom().random() > 0.5:
                 response = hallucinated_response
                 ground_truth = "Yes"
             else:
@@ -285,7 +285,7 @@ def evaluation_summarization_dataset(model, file, instruction, output_path):
             hallucinated_summary = data[i]["hallucinated_summary"]
             right_summary = data[i]["right_summary"]
 
-            if random.random() > 0.5:
+            if secrets.SystemRandom().random() > 0.5:
                 summary = hallucinated_summary
                 ground_truth = "Yes"
             else:

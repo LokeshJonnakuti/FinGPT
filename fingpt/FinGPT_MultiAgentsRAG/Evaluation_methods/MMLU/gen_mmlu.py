@@ -2,8 +2,8 @@ from glob import glob
 import pandas as pd
 import json
 import time
-import random
 import openai
+import secrets
 
 # START: COPIED FROM <https://github.com/composable-models/llm_multiagent_debate.git>
 
@@ -65,13 +65,13 @@ if __name__ == "__main__":
 
     dfs = [pd.read_csv(task) for task in tasks]
 
-    random.seed(0)
+    secrets.SystemRandom().seed(0)
     response_dict = {}
 
     for i in range(100):
-        df = random.choice(dfs)
+        df = secrets.choice(dfs)
         ix = len(df)
-        idx = random.randint(0, ix-1)
+        idx = secrets.SystemRandom().randint(0, ix-1)
 
         question, answer = parse_question_answer(df, idx)
 
