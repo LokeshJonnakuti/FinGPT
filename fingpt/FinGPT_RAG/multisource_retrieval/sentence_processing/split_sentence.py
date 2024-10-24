@@ -6,7 +6,7 @@ def get_redirected_domain(url):
     try:
         if len(url) == 0:
             return None
-        response = requests.head(url[0], allow_redirects=True)
+        response = requests.head(url[0], allow_redirects=True, timeout=60)
         final_url = response.url
         return final_url
     except requests.exceptions.RequestException as e:
