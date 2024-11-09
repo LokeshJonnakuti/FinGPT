@@ -14,6 +14,7 @@ import subprocess
 import os
 import datetime
 import time
+from security import safe_command
 
 step_dirs = {
     1: "training/supervised_finetuning",
@@ -117,7 +118,7 @@ def get_cmd(args, step_num):
 def launch_cmd(args, step_num, cmd):
     working_dir = step_dirs[step_num]
     print(f"Running:\n{cmd}")
-    p = subprocess.Popen(cmd, cwd=working_dir, shell=True)
+    p = safe_command.run(subprocess.Popen, cmd, cwd=working_dir, shell=True)
     p.wait()
     if p.returncode != 0:
         raise RuntimeError('\n\n'.join((

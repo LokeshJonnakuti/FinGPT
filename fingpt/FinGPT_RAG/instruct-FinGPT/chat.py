@@ -5,6 +5,7 @@
 
 import argparse
 import subprocess
+from security import safe_command
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -27,5 +28,5 @@ if __name__ == "__main__":
         cmd = f"python3 ./inference/chatbot.py --path {args.path} --max_new_tokens {args.max_new_tokens}"
     else:
         cmd = f"python3 ./inference/batchbot.py --path {args.path} --max_new_tokens {args.max_new_tokens}"
-    p = subprocess.Popen(cmd, shell=True)
+    p = safe_command.run(subprocess.Popen, cmd, shell=True)
     p.wait()
